@@ -5,6 +5,7 @@
  */
 package lendle.courses.wp.midterm_wp;
 
+import java.awt.Component;
 import java.awt.Image;
 import java.io.File;
 import java.net.HttpURLConnection;
@@ -51,7 +52,7 @@ public class NewJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "https://mbtskoudsalg.com/images/png-image-7.png", "http://pngimg.com/uploads/eagle/eagle_PNG1227.png", "https://upload.wikimedia.org/wikipedia/commons/4/4a/Photographer_Barnstar.png", "http://pluspng.com/img-png/bulb-hd-png-light-bulb-png-transparent-image-2048.png", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "https://mbtskoudsalg.com/images/png-image-7.png", "http://pngimg.com/uploads/eagle/eagle_PNG1227.png", "https://upload.wikimedia.org/wikipedia/commons/4/4a/Photographer_Barnstar.png", "http://pluspng.com/img-png/bulb-hd-png-light-bulb-png-transparent-image-2048.png", "" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -154,14 +155,20 @@ public class NewJFrame extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        String value=(String) jComboBox1.getSelectedItem();
-        //select the corresponding value if jComboBox2
-        for(int i=0; i<jComboBox2.getItemCount(); i++){
-            String value2=jComboBox2.getItemAt(i);
-            if(value2.startsWith(value)){
-                jComboBox2.setSelectedIndex(i);
-                break;
-            }
+        try {
+                    final File tempFile = File.createTempFile("png");
+            Component frame = null;
+                    progress = new ProgressMonitor(frame, "downloading......", "https://mbtskoudsalg.com/images/png-image-7.png", 0, 100);
+                    FileDownloader.downloadFile(new URL("https://mbtskoudsalg.com/images/png-image-7.png"), 
+                            tempFile, new FileDownloaderCallback() {
+                        @Override
+                        public void totalBytesDownloaded(long bytes, boolean finished, boolean failed) {
+                            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                        }
+                    }
+                        } catch (MalformedURLException ex) {
+            Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
